@@ -1,22 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  padding: 32px;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
+.courses {
+  margin-top: 16px;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.courses td {
+  width: 33.33%;
 }
 
-.App-link {
-  color: #09d3ac;
+.courses th {
+  width: 33.33%;
+  text-align: left;
+}
+
+.courses div {
+  padding: 8px;
+}
+
+input[type="text"] {
+  font-size: 20px;
 }
