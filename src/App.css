@@ -7,6 +7,11 @@
   width: 100%;
 }
 
+.logo {
+  width: 30px;
+  margin-top: 10px;
+}
+
 .courses {
   margin-top: 16px;
   width: 100%;
@@ -26,5 +31,18 @@
 }
 
 input[type="text"] {
-  font-size: 20px;
+  display: block;
+  font-size:20px;
+  padding:4px 2px;
+  border:solid 1px #aacfe4;
+  width:1000px;
+  margin:2px 0 20px 10px;
+}
+
+.checkbox {
+  padding: 20px 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
