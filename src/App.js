@@ -35,32 +35,46 @@ function Course(props) {
   )
 }
 
+function Checkbox(props) {
+  return (
+    <label className="checkbox-label">
+      <span className="checkbox">
+        <input
+          type="checkbox"
+          checked={props.checked}
+          onChange={event => props.setChecked(event.target.checked)}
+        />
+        <span className="checkbox-custom"></span>
+      </span>
+      {props.label}
+    </label>
+  )
+}
+
 function PeriodCheckbox(props) {
   // label, period, periods, setPeriods
   return (
-    <label className="checkbox">
-      <input type="checkbox" checked={props.periods.includes(props.period)} onChange={event => {
-        if (event.target.checked) {
-          props.setPeriods([...props.periods, props.period])
-        } else {
-          props.setPeriods([...props.periods].filter(x => x !== props.period))
-        }
-      }} /> {props.label}
-    </label>
+    <Checkbox label={props.label} checked={props.periods.includes(props.period)} setChecked={checked => {
+      if (checked) {
+        props.setPeriods([...props.periods, props.period])
+      } else {
+        props.setPeriods([...props.periods].filter(x => x !== props.period))
+      }
+    }} />
   )
 }
 
 function LanguageCheckbox(props) {
   return (
-    <label className="checkbox">
-      <input type="checkbox" checked={props.languages.includes(props.language)} onChange={event => {
-        if (event.target.checked) {
+    <label>
+      <Checkbox label={props.label} checked={props.languages.includes(props.language)} setChecked={checked => {
+        if (checked) {
           props.setLanguages([...props.languages, props.language])
         }
         else {
           props.setLanguages([...props.languages].filter(x => x !== props.language))
         }
-      }} /> {props.label}
+      }} />
     </label> 
   )
 }
@@ -96,25 +110,34 @@ function App() {
   const unique_subjects = [allSubjectsOption, ...new Set(courses.map(item => item.subject))]
   return (
     <div className="App">
-      <Logo className="logo" /> TUNI course search (Hervanta Campus)  
-      <i className="fas fa-user"></i> 
-        <input type="text" className="input" onChange={event => setSearchTerm(event.target.value)} />
-        {
-          ["1", "2", "3", "4", "5"].map(period => (
-            <PeriodCheckbox key={period} label={periodToString(period)} period={period} periods={periods} setPeriods={setPeriods} />
-          ))
-        }
-
-        <select value={subject} onChange={event => setSubject(event.target.value)}>
-          {unique_subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)}
-        </select>
-
-        {
-          ["en","fi"].map(language => (
-            <LanguageCheckbox key={language} label={languageString(language)} languages={languages} language={language} setLanguages={setLanguages}/>
-          ))
-        }
-
+      <div className="header">
+        <Logo className="logo" /> TUNI course search (Hervanta Campus)  
+      </div>
+      <i className="fas fa-user"></i>
+        <input type="text" placeholder="Type course code or course name here" className="input" onChange={event => setSearchTerm(event.target.value)} />
+        <div className="periodCheckbox">
+          <span className="text">Periods</span>
+          {
+            ["1", "2", "3", "4", "5"].map(period => (
+              <PeriodCheckbox key={period} label={periodToString(period)} period={period} periods={periods} setPeriods={setPeriods} />
+            ))
+          }
+        </div>
+        <div className="subjectDropbox">
+        <span className="text">Subject</span>
+          <select value={subject} onChange={event => setSubject(event.target.value)}>
+            {unique_subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)}
+          </select>  
+        </div>
+        
+        <div className="languageCheckbox">
+        <span className="text">Language</span>
+          {
+            ["en","fi"].map(language => (
+              <LanguageCheckbox key={language} label={languageString(language)} languages={languages} language={language} setLanguages={setLanguages}/>
+            ))
+          }
+        </div>
         <table className="courses">
           <thead>
           <tr>
