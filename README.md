@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is about searching Tampere University courses. To run this, it 
+requires json file which is a result from the other repository code
+https://github.com/myny94/tunicourses_retrieve_data.
+
+demo: http://tunikurssit.s3-website.eu-north-1.amazonaws.com/
 
 ## Available Scripts
 
